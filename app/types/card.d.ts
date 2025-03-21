@@ -5,4 +5,5 @@ export interface Card {
   type: string;
   rarity: string;
   text: string;
+  setName: string;
 }
