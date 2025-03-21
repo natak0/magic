@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, FormEvent, SetStateAction, Dispatch } from "react";
-import { Card } from "../types/card";
+import { Card } from "@/types/card";
 
 const Filter = ({
   setFilteredCards,

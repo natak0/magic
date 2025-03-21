@@ -1,21 +1,17 @@
 import { CardDetail } from "@/components/CardDetail";
 import Link from "next/link";
 import { Card } from "@/types/card";
+import { notFound } from "next/navigation";
 
 async function getCardById(id: string): Promise<Card | null> {
-  try {
-    const res = await fetch(`https://api.magicthegathering.io/v1/cards/${id}`, {
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      return null;
-    }
-    const data = await res.json();
-    return data.card || null;
-  } catch (error) {
-    console.error("Error fetching card:", error);
-    return null;
-  }
+  const res = await fetch(`https://api.magicthegathering.io/v1/cards/${id}`, {
+    cache: "no-cache",
+  });
+  const data: Card = await res.json();
+  if (!data) notFound();
+  const card = data.card;
+
+  return card;
 }
 
 export default async function CardDetailPage({
@@ -23,7 +19,8 @@ export default async function CardDetailPage({
 }: {
   params: { id: string };
 }) {
-  const card = await getCardById(params.id);
+  const { id } = await params;
+  const card = await getCardById(id);
 
   return (
     <main className="min-h-screen bg-gray-50 py-8">

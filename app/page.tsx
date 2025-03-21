@@ -22,7 +22,7 @@ export default async function Home() {
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 inline-block"
           href="https://magicthegathering.io/"
           target="_blank"
           rel="noopener noreferrer"

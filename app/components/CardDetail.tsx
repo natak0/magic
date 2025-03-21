@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { Card } from "@/types/card";
 
 interface CardDetailProps {
@@ -9,14 +8,14 @@ interface CardDetailProps {
 export const CardDetail = ({ card }: CardDetailProps) => {
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-3xl mx-auto">
-      <div className="flex">
-        <div>
-          {card.imageUrl && (
-            <img src={card.imageUrl} alt={card.name} className="p-6" />
-          )}
-        </div>
+      <div className="flex flex-col sm:flex-row">
+        {card.imageUrl && (
+          <div className="w-full p-6">
+            <img src={card.imageUrl} alt={card.name} />
+          </div>
+        )}
 
-        <div className="w-1/2 p-6">
+        <div className="w-full p-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{card.name}</h1>
 
           {card.type && (
