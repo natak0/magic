@@ -1,13 +1,18 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, SetStateAction, Dispatch } from "react";
+import { Card } from "../types/card";
 
-export default function Filter() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const Filter = ({
+  setFilteredCards,
+}: {
+  setFilteredCards: Dispatch<SetStateAction<Card[]>>;
+}) => {
+  const [error, setError] = useState<boolean>(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsLoading(true);
+    setError(false);
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -15,24 +20,28 @@ export default function Filter() {
       const response = await fetch(`/api/cards?name=${name}`, {
         method: "GET",
       });
-
       const data = await response.json();
-      console.log("data", data);
+      if (data.cards.length > 0) setFilteredCards(data.cards);
+      else setError(true);
     } catch (error) {
+      setError(true);
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="w-full max-w-screen-md mx-auto p-4">
-      <input
-        type="text"
-        name="name"
-        placeholder="Search by name"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-    </form>
+    <>
+      <form onSubmit={onSubmit} className="w-full max-w-screen-md mx-auto p-4">
+        <input
+          type="text"
+          name="name"
+          placeholder="Search by name"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </form>
+      {error && <span>No results</span>}
+    </>
   );
-}
+};
+
+export default Filter;

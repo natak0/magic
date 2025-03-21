@@ -1,6 +1,5 @@
-import CardList from "@/components/CardList";
 import { Suspense } from "react";
-import Filter from "./components/Filter";
+import CardsContainer from "./components/CardsContainer";
 
 export default async function Home() {
   const page = 1;
@@ -17,8 +16,7 @@ export default async function Home() {
         </h1>
         <Suspense fallback={<Loading />}>
           <div className="flex gap-4 items-center flex-col">
-            <Filter />
-            <CardList cards={list.cards} />
+            <CardsContainer initialCards={list.cards} />
           </div>
         </Suspense>
       </main>
