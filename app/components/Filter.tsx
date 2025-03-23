@@ -31,10 +31,15 @@ const Filter = ({
 
   return (
     <>
-      <form onSubmit={onSubmit} className="w-full max-w-screen-md mx-auto p-4">
+      <form
+        onSubmit={onSubmit}
+        className="w-full max-w-screen-md mx-auto p-4"
+        role="form"
+      >
         <input
           type="text"
           name="name"
+          role="input"
           placeholder="Search by name"
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
