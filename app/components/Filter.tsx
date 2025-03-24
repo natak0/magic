@@ -41,7 +41,7 @@ const Filter = ({
           name="name"
           role="input"
           placeholder="Search by name"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 text-gray-900 dark:text-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
       </form>
       {error && <span>No results</span>}

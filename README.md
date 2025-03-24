@@ -9,6 +9,7 @@ The list of characters has a search input to search characters by name by using 
 
 ```bash
 npm i
+export NEXT_PUBLIC_SITE_URL=http://localhost:3000
 npm run dev
 ```
 
