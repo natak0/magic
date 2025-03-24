@@ -7,7 +7,7 @@ async function getCardById(id: string): Promise<Card | null> {
   const res = await fetch(`https://api.magicthegathering.io/v1/cards/${id}`, {
     cache: "no-cache",
   });
-  const data: Card = await res.json();
+  const data: { card: Card } = await res.json();
   if (!data) notFound();
   const card = data.card;
 
