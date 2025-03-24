@@ -2,9 +2,8 @@ import { Suspense } from "react";
 import CardsContainer from "./components/CardsContainer";
 
 export default async function Home() {
-  const page = 1;
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/cards?page=${page}`
+    `${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/cards`
   );
   const list = await data.json();
 
@@ -16,7 +15,10 @@ export default async function Home() {
         </h1>
         <Suspense fallback={<Loading />}>
           <div className="flex gap-4 items-center flex-col">
-            <CardsContainer initialCards={list.cards} />
+            <CardsContainer
+              initialCards={list.cards.cards}
+              links={list.linkHeader}
+            />
           </div>
         </Suspense>
       </main>

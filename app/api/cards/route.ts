@@ -16,6 +16,7 @@ export async function GET(request: Request) {
     const response = await fetch(apiUrl, {
       cache: "no-cache",
     });
+
     if (!response.ok) {
       return NextResponse.json(
         { error: "Failed to fetch cards" },
@@ -23,7 +24,13 @@ export async function GET(request: Request) {
       );
     }
     const data = await response.json();
-    return NextResponse.json(data);
+
+    const linkHeader = response.headers.get("Link");
+
+    return NextResponse.json({
+      cards: data,
+      linkHeader,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: "Internal Server Error" },

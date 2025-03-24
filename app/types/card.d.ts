@@ -7,3 +7,7 @@ export interface Card {
   text: string;
   setName: string;
 }
+
+export interface CardsListProps {
+  cards: Card[];
+}
