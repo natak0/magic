@@ -1,6 +1,6 @@
 "use client";
 import React, { Dispatch, SetStateAction, FC } from "react";
-import { Card } from "../types/card";
+import { Card } from "@/types/card";
 
 type PaginationProps = {
   header: string;
@@ -18,16 +18,17 @@ const Pagination: FC<PaginationProps> = ({
   setFilteredCards,
   setNewLinks,
 }) => {
-  const parseHeader = (str: string): Link[] => {
-    const regex = /<([^>]+)>; rel="([^"]+)"/g;
-    const links: Link[] = [];
+  const parseHeader = (linkHeaderStr: string): Link[] => {
+    if (!linkHeaderStr) return [];
 
-    let match;
-    while ((match = regex.exec(str)) !== null) {
-      links.push({ url: match[1], rel: match[2] });
-    }
-
-    return links;
+    return linkHeaderStr.split(",").map((link) => {
+      const [url, rel] = link.split(";");
+      const urlStr = url.trim().replace(/[<>]/g, "");
+      return {
+        rel: rel.trim().replace(/rel="(.+)"/, "$1"),
+        url: url.trim().replace(/[<>]/g, ""),
+      };
+    });
   };
 
   const getUrlByRel = (rel: string, links: Link[]) => {
@@ -63,20 +64,19 @@ const Pagination: FC<PaginationProps> = ({
     parsedLinks &&
     prevLink &&
     nextLink && (
-      <div className="flex justify-end items-center space-x-4 py-4">
+      <div className="flex justify-end space-x-2">
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+          className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
           onClick={() => onButtonClick(prevLink)}
         >
           Prev
         </button>
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+          className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
           onClick={() => onButtonClick(nextLink)}
         >
           Next
         </button>
-        )
       </div>
     )
   );
