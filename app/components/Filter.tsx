@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, FormEvent, SetStateAction, Dispatch } from "react";
+import { useState, FormEvent, SetStateAction, Dispatch, FC } from "react";
 import { Card } from "@/types/card";
 
-const Filter = ({
-  setFilteredCards,
-}: {
+type FilterProps = {
   setFilteredCards: Dispatch<SetStateAction<Card[]>>;
-}) => {
+};
+
+const Filter: FC<FilterProps> = ({ setFilteredCards }) => {
   const [error, setError] = useState<boolean>(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -21,7 +21,8 @@ const Filter = ({
         method: "GET",
       });
       const data = await response.json();
-      if (data.cards.length > 0) setFilteredCards(data.cards);
+      const cards = data.cards;
+      if (cards.cards.length > 0) setFilteredCards(cards.cards);
       else setError(true);
     } catch (error) {
       setError(true);
@@ -48,5 +49,4 @@ const Filter = ({
     </>
   );
 };
-
 export default Filter;
