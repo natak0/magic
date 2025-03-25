@@ -5,7 +5,7 @@ The application (Next.js, React, Typescript) consists of 2 views. A list of char
 
 The list of characters has a search input to search characters by name by using the API’s query parameter (?name=).
 
-## Run the app
+## Run the app locally
 
 ```bash
 npm i

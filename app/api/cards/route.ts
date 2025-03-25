@@ -32,9 +32,7 @@ export async function GET(request: Request) {
       linkHeader,
     });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    console.error("Error fetching cards:", error);
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }

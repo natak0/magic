@@ -23,7 +23,7 @@ const Pagination: FC<PaginationProps> = ({
 
     return linkHeaderStr.split(",").map((link) => {
       const [url, rel] = link.split(";");
-      const urlStr = url.trim().replace(/[<>]/g, "");
+
       return {
         rel: rel.trim().replace(/rel="(.+)"/, "$1"),
         url: url.trim().replace(/[<>]/g, ""),

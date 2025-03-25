@@ -1,5 +1,6 @@
 "use client";
 import { Card } from "@/types/card";
+import Image from "next/image";
 
 interface CardDetailProps {
   card: Card;
@@ -11,7 +12,14 @@ export const CardDetail = ({ card }: CardDetailProps) => {
       <div className="flex flex-col sm:flex-row">
         {card.imageUrl && (
           <div className="w-full p-6">
-            <img src={card.imageUrl} alt={card.name} />
+            <Image
+              src={card.imageUrl}
+              alt={card.name}
+              width={223}
+              height={310}
+              priority
+              unoptimized
+            />
           </div>
         )}
 
